@@ -1,0 +1,15 @@
+L2 - structures
+Lecture summary:
+    - pair/tuple
+    - structures
+    - auto
+    - structured bindings
+
+
+
+
+
+
+
+
+
