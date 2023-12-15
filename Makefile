@@ -26,7 +26,7 @@ EXES := $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%, $(SRCS))
 INC_DIR += $(shell find $(SRCS) -type d)
 LIB_FLAGS := $(addprefix -l, $(LIBS))
 INC_FLAGS := $(addprefix -I, $(INC_DIR))
-CXX_FLAGS := -MMD -MP -std=$(CXX_STANDERD) $(INC_FLAGS)
+CXX_FLAGS := -Wall -MMD -MP -std=$(CXX_STANDERD) $(INC_FLAGS)
 
 
 # Pattern Rules for Executables
