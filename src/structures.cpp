@@ -110,16 +110,17 @@ void useVector()
     cout << endl;
 }
 
+#define UNUSED __attribute__((unused))
 void useAuto()
 {
-    auto a = 3;
-    auto b = 4.3;
-    auto c = 'X';
-    auto d = "Hello";
-    auto e = "Hello"s;
-    auto f = std::make_pair(3, "Hello");
-    auto g = {1, 2, 3};
-    auto h = [](int i)
+    auto a UNUSED = 3;
+    auto b UNUSED = 4.3;
+    auto c UNUSED = 'X';
+    auto d UNUSED = "Hello";
+    auto e UNUSED = "Hello"s;
+    auto f UNUSED = std::make_pair(3, "Hello");
+    auto g UNUSED = {1, 2, 3};
+    auto h UNUSED = [](int i)
     { return 3 * i; };
 }
 
