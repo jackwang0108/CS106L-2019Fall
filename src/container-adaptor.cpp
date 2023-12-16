@@ -20,5 +20,50 @@ void useQueue();
 
 int main(int argc, char *argv[])
 {
+    useStack();
+    useQueue();
     return 0;
+}
+
+void useStack()
+{
+    stack<int> myStack;
+    cout << "Pushing: ";
+    for (auto i : {1, 2, 3, 4, 5})
+    {
+        cout << i << " ";
+        myStack.push(i);
+    }
+    cout << endl;
+
+    cout << "Poping: ";
+    while (!myStack.empty())
+    {
+        cout << myStack.top() << " ";
+        myStack.pop();
+    }
+    cout << endl;
+    cout << (myStack.empty() ? "myStack is empty now" : "myStack still has value") << endl;
+}
+
+void useQueue()
+{
+    queue<int> myQuene;
+
+    cout << "Enqueue: ";
+    for (auto i : {1, 2, 3, 4, 5})
+    {
+        cout << i << " ";
+        myQuene.push(i);
+    }
+    cout << endl;
+
+    cout << "Dequeue: ";
+    while (!myQuene.empty())
+    {
+        cout << myQuene.front() << " ";
+        myQuene.pop();
+    }
+    cout << endl;
+    cout << (myQuene.empty() ? "myQueue is empty now" : "myQueue still has some value") << endl;
 }
