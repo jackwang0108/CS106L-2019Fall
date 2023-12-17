@@ -46,8 +46,8 @@ string getLine();
 
 int main(int argc, char *argv[])
 {
-    // useMap();
-    useSet();
+    useMap();
+    // useSet();
     return 0;
 }
 
@@ -83,6 +83,10 @@ void useMap()
             // frequencyMap.contains(words);
         }
     }
+
+    // we can also insert to a map using pait
+    frequencyMap.insert(make_pair("jack", 2));
+    frequencyMap.insert({"wang", 2});
 
     cout << "Enter the word you want to look up." << endl;
     while (true)
