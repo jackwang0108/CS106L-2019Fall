@@ -180,6 +180,12 @@ void removeAllA(vector<string> &vec)
 // = Summary of Iterator Invalidation
 // = Some operations on some containers invalidate iterators. Read the documentation!
 // = These operations usually will return a valid iterate that you should use instead.
+// * Different container has different invalidate rules:
+// *        1. iterators to erase point is always invalidated
+// *        2. vactor: all iterators after erasure point is invalidated due to all element after erasure point shifting ahead
+// *        3. deque: all iterators ivalidated unless the erasure point is front of the deck
+// *        4. list/set/map: all other iterators are still validated
+// * Plus: Always read the documentations
 
 void ereaseAll()
 {
