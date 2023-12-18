@@ -1,6 +1,6 @@
 # Global Variables
 CXX := /usr/bin/g++
-CXX_STANDERD := c++17
+CXX_STANDERD := c++20
 
 # Directories
 BIN_DIR := ./bin
