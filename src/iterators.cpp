@@ -71,13 +71,17 @@ void basicUsage();
 // * For map iterators, the iterator will points to pair
 void mapIterator();
 void classCode();
+void useErease();
+void ereaseAll();
 
 int main(int argc, char *argv[])
 {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
     // basicUsage();
     // mapIterator();
-    classCode();
+    // classCode();
+    // useErease();
+    ereaseAll();
     return 0;
 }
 
@@ -124,6 +128,65 @@ void mapIterator()
         cout << (*iter).first << ": " << (*iter).second << endl;
         iter++;
     }
+}
+
+void removeFirstA(vector<string> &vec)
+{
+    for (auto iter = vec.begin(); iter != vec.end(); ++iter)
+    {
+        if (!(*iter).empty() && (*iter)[0] == 'A')
+        {
+            vec.erase(iter);
+            return;
+        }
+    }
+}
+
+void useErease()
+{
+    vector<string> vec{"Apple", "Banana", "Cash", "Dragon"};
+    removeFirstA(vec);
+    for (auto i : vec)
+        cout << i << endl;
+}
+
+// * Note, if use removeFirstA to remove all A by delete return
+// * is actually problematic.
+// * because the iterator knows how to get from one element to the next through the entire range
+// * When an element is erased, the container may reorganize the layout of the elements
+// * But The iterator still thinks it should follow previous arrows to find the next element.
+// * So after erase, some iterators will be invalid.
+// * Not all iterator will be invaild, for example, std::array::iterator
+// * will not be invaild because the elements are in a piece of memory
+// * That's why std::list and std::array are stable in cppreference
+
+// = the good news is erase will returns a new valid iterator
+// = so we can use that for the next iteration to remove all A
+void removeAllA(vector<string> &vec)
+{
+    for (auto iter = vec.begin(); iter != vec.end();)
+    {
+        if (!(*iter).empty() && (*iter)[0] == 'A')
+        {
+            vec.erase(iter);
+        }
+        else
+        {
+            ++iter;
+        }
+    }
+}
+
+// = Summary of Iterator Invalidation
+// = Some operations on some containers invalidate iterators. Read the documentation!
+// = These operations usually will return a valid iterate that you should use instead.
+
+void ereaseAll()
+{
+    vector<string> vec{"Apple", "Banana", "Appalachian", "Cash", "Abandon", "Dragon"};
+    removeAllA(vec);
+    for (auto i : vec)
+        cout << i << endl;
 }
 
 void printVec(const vector<int> &vec)
