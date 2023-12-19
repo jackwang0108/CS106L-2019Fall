@@ -569,6 +569,22 @@ void useSfinae()
     // printSizeSfniae(nullptr); // compiler error
 }
 
+// * Except functor and lambda function, std::bind provide another
+// * solution to functions which need extra information
+bool isLessThanLimit(int val, int limit)
+{
+    return val < limit;
+}
+
+#include <functional>
+void useBind()
+{
+    vector<int> vec{1, 3, 5, 7, 9};
+    int limit = 8;
+    auto isLessThan = std::bind(isLessThanLimit, std::placeholders::_1, limit);
+    cout << countOccurenceMoreGeneric(vec.begin(), vec.end(), isLessThan) << endl;
+}
+
 // * Summary
 // decltype can be used to ensure the implicit interface
 
@@ -579,6 +595,7 @@ int main(int argc, char *agrv[])
     // vector<int> vec{1, 2, 3, 4, 4, 3, 2, 1, 5};
     // cout << countOccurence(vec.begin(), vec.end(), 3) << endl;
     // useLambda();
-    useDecltype();
+    // useDecltype();
+    useBind();
     return 0;
 }
