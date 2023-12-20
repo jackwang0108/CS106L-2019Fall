@@ -21,7 +21,7 @@ struct Time {
 };
 
 struct Course {
-  std::string code;
+  std::string name;
   std::pair<Time, Time> time;           // start and end times
   std::vector<std::string> instructors;
 };
@@ -79,7 +79,7 @@ void print_time(const Time& time) {
 
 // we'll overload operators instead, as this was really tedious.
 void print_course(const Course& course) {
-    std::cout << course.code << " ";
+    std::cout << course.name << " ";
     print_time(course.time.first);
     std::cout << "-";
     print_time(course.time.second);
