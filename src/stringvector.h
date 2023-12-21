@@ -25,6 +25,7 @@ public:
     // Copy constructor
     StringVector(const StringVector &other) noexcept;
     StringVector(size_type n, const std::string &val);
+    StringVector(StringVector &&other) noexcept;
     ~StringVector();
 
     using iterator = std::string *;
@@ -42,6 +43,7 @@ public:
     StringVector &operator+=(const StringVector &other);
     StringVector operator+(const StringVector &other) const;
     StringVector &operator=(const StringVector &other);
+    StringVector &operator=(StringVector &&rhs) noexcept;
 
     // prohibit other operator
     StringVector &operator-=(const StringVector &other) = delete;
@@ -202,5 +204,31 @@ StringVector &StringVector::operator=(const StringVector &other)
 // By default, we don't have to create the destructor by ouerself,
 // we just need to create different types of constructor
 // if and only if we have something special (ownership problem), we need to create a destructor
+
+// Move constructor
+// * the key concept of move semantics is use rvalue reference as parameter
+// * and steal the member from rvalue reference
+StringVector::StringVector(StringVector &&other) noexcept
+    : elems(std::move(other.elems)),
+      logicalSize(std::move(other.logicalSize)),
+      allocatedSize(std::move(other.allocatedSize))
+{
+    other.elems = nullptr;
+}
+
+// move assign operator
+StringVector &StringVector::operator=(StringVector &&rhs) noexcept
+{
+    if (this != &rhs)
+    {
+        // delete this before
+        delete[] elems;
+        logicalSize = std::move(rhs.logicalSize);
+        allocatedSize = std::move(rhs.allocatedSize);
+        elems = rhs.elems;
+        rhs.elems = nullptr;
+    }
+    return *this;
+}
 
 #endif
